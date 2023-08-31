@@ -30,7 +30,7 @@
      */
     function onLoad() {
       // 화면 이동
-      window.location = WALLET_APP_SCHEMA;
+      location.href = WALLET_APP_SCHEMA;
 
       // 이동 확인
       setTimeout(() => {
@@ -40,7 +40,7 @@
         // 스토어로 이동
         if (!isAppInstalled) {
           updateStatus('app not installed');
-          window.location = WALLET_APP_STORE_URL;
+          location.href = WALLET_APP_STORE_URL;
         } else {
           updateStatus('app installed');
         }
