@@ -5,13 +5,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script>
+    /**
+     * ### 지갑 앱 실행 스키마
+     * 
+     * 지갑 앱을 실행할 스키마입니다.
+     */
+    const WALLET_APP_SCHEMA = 'bitkeep://';
+
+    /**
+     * ### 지갑 앱 앱스토어 URL
+     * 
+     * 지갑 앱이 설치되지 않았을 때 실행할 앱스토어 설치 URL입니다.
+     */
+    const WALLET_APP_STORE_URL = 'https://apps.apple.com/app/id1395301115';
+
+    // 윈도우 로드 완료 시 실행
+    window.onload = onLoad;
+
+    /**
+     * 윈도우가 로드되고 실행될 함수입니다.
+     * 
+     * @returns { void }
+     */
+    function onLoad() {
+      // 화면 이동
+      window.location = WALLET_APP_SCHEMA;
+
+      // 이동 확인
+      setTimeout(() => {
+        // 앱 설치 여부
+        const isAppInstalled = document.webkitHidden || document.hidden;
+
+        // 스토어로 이동
+        if (!isAppInstalled) {
+          updateStatus('app not installed');
+          window.location = WALLET_APP_STORE_URL;
+        } else {
+          updateStatus('app installed');
+        }
+      }, 2000)
+    }
+
+    /**
+     * 화면에 현재 상태를 업데이트합니다.
+     * 
+     * @param text { string } 업데이트할 상태
+     * @returns { void }
+     */
+    function updateStatus(text) {
+      const status = document.getElementById('status');
+      if (!status) return;
+      status.innerText = text;
+    }
+  </script>
 </head>
 
 <body>
-  <a href="kakaotalk://">링크 테스트</a>
-  <a id="applink"
-    href="intent://millieshelf#Intent;scheme=millieshelf;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=kr.co.millie.millieshelf;end">
-    앱실행 또는 구글 플래이 다운로드 화면으로 이동</a>
+  <div>
+    Switching to Bitget Wallet...
+  </div>
+  <div id="status">
+    loading...
+  </div>
 </body>
 
 </html>
